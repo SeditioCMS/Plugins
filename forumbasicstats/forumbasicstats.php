@@ -31,7 +31,6 @@ $evil_p = sed_import('forumbasicstats','P','TXT');
 $evil_g = sed_import('forumbasicstats','G','TXT');
 
 require("plugins/forumbasicstats/lang/forumbasicstats.".$usr['lang'].".lang.php");
-
 $cfg_days = $cfg['plugin']['forumbasicstats']['config_days'];
 
 if (!$forumbasicstats || $evil_g!='' || $evil_p!='' )
