@@ -51,6 +51,8 @@ $cfg_names = explode (",", $cfg['plugin']['contact']['recipients']);
 
 if ($a=='send')
 	{
+	$error = '';
+	
 	if (!empty($sender_tarp))
 		{ die("Error."); }
 
@@ -111,7 +113,7 @@ $antispam_fak = array_reverse($antispam_key);
 $antispam_key = implode ('.', $antispam_key);
 $antispam_fak = implode ('.', $antispam_fak);
 
-$antispam .= "&nbsp; <strong>".$antispam_key."</strong> &nbsp;";
+$antispam = "&nbsp; <strong>".$antispam_key."</strong> &nbsp;";
 $antispam .= sed_textbox('sender_key', $sender_key, 8, 8);
 $antispam .= sed_textbox_hidden('sender_fak', $antispam_fak);
 
