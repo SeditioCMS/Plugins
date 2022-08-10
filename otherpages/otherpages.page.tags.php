@@ -29,6 +29,7 @@ Order=10
 if (!defined('SED_CODE')) { die('Wrong URL.'); }
 
 $maxotherpages = $cfg['plugin']['otherpages']['maxpages'];
+$cfg['plu_mask_pages_date'] = "<span class=\"sdate\">{d-m-Y} {H:i}</span>";
 
 function sed_get_otherpages($pid, $cat, $limit)
 	{
@@ -36,13 +37,13 @@ function sed_get_otherpages($pid, $cat, $limit)
 
 	$pcomments = ($cfg['showcommentsonpage']) ? "" : "&comments=1";
 	
-	$sql = sed_sql_query("(SELECT p.page_id, p.page_alias, p.page_cat, p.page_title, p.page_date, p.page_ownerid, p.page_comcount, 
+	$sql = sed_sql_query("(SELECT p.page_id, p.page_alias, p.page_cat, p.page_title, p.page_desc, p.page_date, p.page_ownerid, p.page_comcount, 
 						p.page_thumb, u.user_id, u.user_name, u.user_maingrp, u.user_avatar 
 						FROM $db_pages AS p LEFT JOIN $db_users AS u ON u.user_id = p.page_ownerid 
 						WHERE p.page_id < ".(int)$pid." AND p.page_state = 0 AND p.page_cat = '".$cat."' 
 						ORDER BY p.page_date DESC LIMIT $limit) 
 						UNION 
-						(SELECT p.page_id, p.page_alias, p.page_cat, p.page_title, p.page_date, p.page_ownerid, p.page_comcount, 
+						(SELECT p.page_id, p.page_alias, p.page_cat, p.page_title, p.page_desc, p.page_date, p.page_ownerid, p.page_comcount, 
 						p.page_thumb, u.user_id, u.user_name, u.user_maingrp, u.user_avatar 
 						FROM $db_pages AS p LEFT JOIN $db_users AS u ON u.user_id = p.page_ownerid 
 						WHERE p.page_id > ".(int)$pid." AND p.page_state = 0 AND p.page_cat = '".$cat."' 
@@ -62,6 +63,8 @@ function sed_get_otherpages($pid, $cat, $limit)
 					"OTHER_PAGES_ROW_URL" => $row['page_pageurl'],
 					"OTHER_PAGES_ROW_ID" => $row['page_id'],
 					"OTHER_PAGES_ROW_CAT" => $row['page_cat'],
+					"OTHER_PAGES_ROW_CATURL" => sed_url('list', 'c='.$row['page_cat']),
+					"OTHER_PAGES_ROW_DESC" => $row['page_desc'],
 					"OTHER_PAGES_ROW_CATTITLE" => $sed_cat[$row['page_cat']]['title'],
 					"OTHER_PAGES_ROW_CATPATH" => sed_build_catpath($row['page_cat'], "<a href=\"%1\$s\">%2\$s</a>"),
 					"OTHER_PAGES_ROW_SHORTTITLE" => sed_cutstring($row['page_title'], 50),
@@ -79,15 +82,15 @@ function sed_get_otherpages($pid, $cat, $limit)
 				
 				if (!empty($row['page_thumb']))
 					{	
-					$first_thumb_array = rtrim($row['page_thumb']); 
-					if ($first_thumb_array[mb_strlen($first_thumb_array) - 1] == ';') 
+					$page_thumbs_array = rtrim($row['page_thumb']); 
+					if ($page_thumbs_array[mb_strlen($page_thumbs_array) - 1] == ';') 
 						{
-						$first_thumb_array = mb_substr($first_thumb_array, 0, -1);		
+						$page_thumbs_array = mb_substr($page_thumbs_array, 0, -1);		
 						}		
-					$first_thumb_array = explode(";", $first_thumb_array);
-					if (count($first_thumb_array) > 0)
+					$page_thumbs_array = explode(";", $page_thumbs_array);
+					if (count($page_thumbs_array) > 0)
 						{
-						$t->assign("OTHER_PAGES_ROW_THUMB", $first_thumb_array[0]);  
+						$t->assign("OTHER_PAGES_ROW_THUMB", $page_thumbs_array[0]);  
 						$t->parse("MAIN.OTHER_PAGES.OTHER_PAGES_ROW.OTHER_PAGES_ROW_THUMB");	
 						}
 					else 
