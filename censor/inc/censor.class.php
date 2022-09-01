@@ -145,7 +145,7 @@ class ObsceneCensorRus {
 		[' . self::$LT_I . ']+[' . self::$LT_D . self::$LT_T . ']+
 		|
 		[' . self::$LT_I . ']+[' . self::$LT_A . ']+
-	)(?!х)\w* # kahretsin, kahretsin; "rozet" izin vermez
+	)(?!х)\w* # бля, блядь; не пускает "бляха"
 |
 	(?:
 		\w*[' . self::$LT_YI . self::$LT_U . self::$LT_E . self::$LT_A . self::$LT_O . self::$LT_HS . self::$LT_SS . self::$LT_Y . self::$LT_YA . '][' . self::$LT_E . self::$LT_YO . self::$LT_YA . self::$LT_I . '][' . self::$LT_B . self::$LT_P . '](?!ы\b|ол)\w* # не пускает "еёбы", "наиболее", "наибольшее"...

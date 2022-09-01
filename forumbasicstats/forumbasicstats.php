@@ -31,6 +31,7 @@ $evil_p = sed_import('forumbasicstats','P','TXT');
 $evil_g = sed_import('forumbasicstats','G','TXT');
 
 require("plugins/forumbasicstats/lang/forumbasicstats.".$usr['lang'].".lang.php");
+
 $cfg_days = $cfg['plugin']['forumbasicstats']['config_days'];
 
 if (!$forumbasicstats || $evil_g!='' || $evil_p!='' )
@@ -40,6 +41,11 @@ if (!$forumbasicstats || $evil_g!='' || $evil_p!='' )
 	$weekback2 = 	 $sys['now_offset'] - (1209600);
 	$totaltopics = sed_sql_rowcount($db_forum_topics);
 	$totalposts = sed_sql_rowcount($db_forum_posts); 
+	
+	/*$sqltmp = sed_sql_query("SELECT SUM(fs_topiccount_pruned) FROM $db_forum_sections ");
+	$totaltopics += sed_sql_result($sqltmp,0,"SUM(fs_topiccount_pruned)");
+	$sqltmp = sed_sql_query("SELECT SUM(fs_postcount_pruned) FROM $db_forum_sections ");
+	$totalposts += sed_sql_result($sqltmp,0,"SUM(fs_postcount_pruned)");*/
 	
 	$sqltmp = sed_sql_query("SELECT stat_value FROM $db_stats where stat_name='maxusers' LIMIT 1");
 	$row = sed_sql_fetcharray($sqltmp);

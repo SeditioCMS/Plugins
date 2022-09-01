@@ -2,7 +2,7 @@
 /* ====================
 Seditio - Website engine
 Copyright Neocrome & Seditio Team
-https://seditiocms.com
+https://seditio.org
 
 [BEGIN_SED]
 File=plugins/ftsearch/ftsearch.php
