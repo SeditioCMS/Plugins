@@ -67,4 +67,4 @@ as published by Regents of the University of California.</p>
 
 <p>Seditio CMS Kurulum ve dökümanlar için web sitemizi ziyaret edebilirsiniz.</p>
 <p>Bir sorun yaşarsanız bize yazın.</p>
-<p>https://seditiocms.com</p>
+<p>https://seditio.com.tr</p>
