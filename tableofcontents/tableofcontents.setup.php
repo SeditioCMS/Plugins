@@ -6,35 +6,32 @@ Copyright Neocrome
 https://seditio.org
 
 [BEGIN_SED]
-File=plugins/ogmetas/ogmetas.setup.php
+File=plugins/tableofcontents/tableofcontents.setup.php
 Version=179
-Updated=2022-aug-29
+Updated=2021-may-02
 Type=Plugin
 Author=Amro
 Description=
 [END_SED]
 
 [BEGIN_SED_EXTPLUGIN]
-Code=ogmetas
-Name=Ogmetas
-Description=Open graph metas add
+Code=tableofcontents
+Name=Table of contents
+Description=Generate table ofcontents
 Version=179
-Date=2022-aug-29
+Date=2021-may-02
 Author=Amro
 Copyright=Amro
 Notes=
 SQL=
-Auth_guests=R
-Lock_guests=W12345A
+Auth_guests=0
+Lock_guests=RW12345A
 Auth_members=R
 Lock_members=W12345A
 [END_SED_EXTPLUGIN]
 
 [BEGIN_SED_EXTPLUGIN_CONFIG]
-img_deafult=01:string::noimg.jpg:Default og image filename from users folder
-img_width=02:string::800:Width og image
-img_height=03:string::800:Height og image
-locale=04:string::en_GB:Locale
+tbc_extra=01:select:text2,text3:text3:Use an extra slot to store the generated table of contents page
 [END_SED_EXTPLUGIN_CONFIG]
 
 ==================== */
