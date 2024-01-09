@@ -98,7 +98,7 @@ class ItcSubmitForm {
         this._setStateValidaion(elAttach, 'error', `Размер файла больше ${this._attach.maxFileSize}Кб`);
         valid = false;
       } else if (!ItcSubmitForm._checkExt(item.file.name, this._attach.ext)) {
-        this._setStateValidaion(elAttach, 'error', 'Тип не является допустимым');
+        this._setStateValidaion(elAttach, 'error', 'The type is not valid');
         valid = false;
       } else {
         this._setStateValidaion(elAttach, 'success', '');
