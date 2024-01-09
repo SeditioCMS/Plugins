@@ -84,12 +84,12 @@ define('UPLOAD_PATH', 'plugins/feedback/uploads/');
 
 // отправлять письмо
 define('HAS_SEND_EMAIL', true);
-// добавить ли прикреплённые файлы в тело письма в виде ссылок
+// whether to add attached files to the body of the letter in the form of links
 define('HAS_ATTACH_IN_BODY', false);
 const EMAIL_SETTINGS = array(
-  'addresses' => ['admin@batareya30.ru'], // кому необходимо отправить письмо
-  'from' => ['noreply-batareya@nmn.su', 'БАТАРЕЯ'], // от какого email и имени необходимо отправить письмо
-  'subject' => 'Сообщение с формы обратной связи batareya30.ru', // тема письма
+  'addresses' => ['admin@batareya30.ru'], // who needs to send a letter
+  'from' => ['noreply-batareya@nmn.su', 'БАТАРЕЯ'], // from what email and name should the letter be sent?
+  'subject' => 'Message from the feedback form batareya30.ru', // letter subject
   'host' => 'nmn.su', // SMTP-хост
   'username' => 'noreply-batareya@nmn.su', // // SMTP-пользователь
   'password' => 'Y99vBHGEvyxel8fP', // SMTP-пароль
@@ -97,7 +97,7 @@ const EMAIL_SETTINGS = array(
 );
 define('HAS_SEND_NOTIFICATION', false);
 define('BASE_URL', 'http://batareya30.ru/');
-define('SUBJECT_FOR_CLIENT', 'Ваше сообщение доставлено');
+define('SUBJECT_FOR_CLIENT', 'Your message has been delivered');
 //
 define('HAS_WRITE_TXT', true);
 
@@ -124,8 +124,8 @@ if (!empty($_POST['name'])) {
   $data['form']['name'] = htmlspecialchars($_POST['name']);
 } else {
   $data['result'] = 'error';
-  $data['errors']['name'] = 'Заполните это поле.';
-  itc_log('Не заполнено поле name.');
+  $data['errors']['name'] = 'Fill in this field.';
+  itc_log('The name field is not filled in.');
 }
 
 // валидация email
@@ -133,13 +133,13 @@ if (!empty($_POST['email'])) {
   $data['form']['email'] = $_POST['email'];
   if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
     $data['result'] = 'error';
-    $data['errors']['email'] = 'Email не корректный.';
-    itc_log('Email не корректный.');
+    $data['errors']['email'] = 'Email is not correct.';
+    itc_log('Email is not correct.');
   }
 } else {
   $data['result'] = 'error';
-  $data['errors']['email'] = 'Заполните это поле.';
-  itc_log('Не заполнено поле email.');
+  $data['errors']['email'] = 'Fill in this field.';
+  itc_log('The email field is not filled in.');
 }
 
 // валидация message
@@ -147,13 +147,13 @@ if (!empty($_POST['message'])) {
   $data['form']['message'] = htmlspecialchars($_POST['message']);
   if (mb_strlen($data['form']['message'], 'UTF-8') < 20) {
     $data['result'] = 'error';
-    $data['errors']['message'] = 'Это поле должно быть не меньше 20 cимволов.';
-    itc_log('Поле message должно быть не меньше 20 cимволов.');
+    $data['errors']['message'] = 'This field must be at least 20 characters long.';
+    itc_log('The message field must be at least 20 characters long.');
   }
 } else {
   $data['result'] = 'error';
-  $data['errors']['message'] = 'Заполните это поле.';
-  itc_log('Не заполнено поле message.');
+  $data['errors']['message'] = 'Fill in this field.';
+  itc_log('The message field is not filled in.');
 }
 
 // проверка капчи
@@ -163,8 +163,8 @@ if (HAS_CHECK_CAPTCHA) {
     $data['form']['captcha'] = $_POST['captcha'];
   } else {
     $data['result'] = 'error';
-    $data['errors']['captcha'] = 'Код не соответствует изображению.';
-    itc_log('Не пройдена капча. Указанный код ' . $captcha . ' не соответствует ' . $_SESSION['captcha']);
+    $data['errors']['captcha'] = 'The code does not match the image.';
+    itc_log('Captcha failed. Specified code ' . $captcha . ' does not match ' . $_SESSION['captcha']);
   }
 }
 
@@ -173,16 +173,16 @@ if ($_POST['agree'] == 'true') {
   $data['form']['agree'] = true;
 } else {
   $data['result'] = 'error';
-  $data['errors']['agree'] = 'Необходимо установить этот флажок.';
-  itc_log('Не установлен флажок для поля agree.');
+  $data['errors']['agree'] = 'This checkbox must be checked.';
+  itc_log('The agree field is not checked.');
 }
 
 // валидация прикреплённых файлов
 if (empty($_FILES['attach'])) {
   if (HAS_ATTACH_REQUIRED) {
     $data['result'] = 'error';
-    $data['errors']['attach'] = 'Заполните это поле.';
-    itc_log('Не прикреплены файлы к форме.');
+    $data['errors']['attach'] = 'Fill in this field.';
+    itc_log('Files are not attached to the form.');
   }
 } else {
   foreach ($_FILES['attach']['error'] as $key => $error) {
@@ -198,13 +198,13 @@ if (empty($_FILES['attach'])) {
 
       if (!in_array($mtype, ALLOWED_MIME_TYPES) && !(in_array($ext2, ALLOWED_EXTENSIONS) && ($ext == $ext2))) {
         $data['result'] = 'error';
-        $data['errors']['attach'][$key] = 'Файл имеет не разрешённый тип.';
+        $data['errors']['attach'][$key] = 'The file is of an unauthorized type.';
         $data['errors']['attach']['mtype'] = $mtype;
-        itc_log('Прикреплённый файл ' . $name . ' имеет не разрешённый тип.');
+        itc_log('Attached file ' . $name . ' has an unauthorized type.');
       } else if ($size > MAX_FILE_SIZE) {
         $data['result'] = 'error';
-        $data['errors']['attach'][$key] = 'Размер файла превышает допустимый.';
-        itc_log('Размер файла ' . $name . ' превышает допустимый.');
+        $data['errors']['attach'][$key] = 'File size exceeds allowable size.';
+        itc_log('file size ' . $name . ' exceeds permissible.');
       }
     }
   }
@@ -222,8 +222,8 @@ if (empty($_FILES['attach'])) {
 
       if (!move_uploaded_file($tmp, UPLOAD_PATH . $newName)) {
         $data['result'] = 'error';
-        $data['errors']['attach'][$key] = 'Ошибка при загрузке файла.';
-        itc_log('Ошибка при перемещении файла ' . $name . '.');
+        $data['errors']['attach'][$key] = 'Error uploading file.';
+        itc_log('Error moving file ' . $name . '.');
       } else {
         $attachs[] = UPLOAD_PATH . $newName;
       }
@@ -289,10 +289,10 @@ if ($data['result'] == 'success' && HAS_SEND_EMAIL == true) {
     $mail->Subject = EMAIL_SETTINGS['subject'];
     $mail->Body = $body;
     $mail->send();
-    itc_log('Форма успешно отправлена.' . $mail->ErrorInfo);
+    itc_log('Form submitted successfully.' . $mail->ErrorInfo);
   } catch (Exception $e) {
     $data['result'] = 'error';
-    itc_log('Ошибка при отправке письма: ' . $mail->ErrorInfo);
+    itc_log('Error sending email: ' . $mail->ErrorInfo);
   }
 }
 
@@ -311,19 +311,19 @@ if ($data['result'] == 'success' && HAS_SEND_NOTIFICATION) {
     $mail->Body = $body;
     $mail->addAddress($data['form']['email']);
     $mail->send();
-    itc_log('Успешно отправлено уведомление пользователю.');
+    itc_log('Successfully sent a notification to the user.');
   } catch (Exception $e) {
-    itc_log('Ошибка при отправке уведомления пользователю: ' . $mail->ErrorInfo);
+    itc_log('Error sending notification to user: ' . $mail->ErrorInfo);
   }
 }
 
 if ($data['result'] == 'success' && HAS_WRITE_TXT) {
   $output = '=======' . date('d.m.Y H:i') . '=======';
-  $output .= 'Имя: ' . $data['form']['name'] . PHP_EOL;
+  $output .= 'Name: ' . $data['form']['name'] . PHP_EOL;
   $output .= 'Email: ' . $data['form']['email'] . PHP_EOL;
-  $output .= 'Сообщение: ' . $data['form']['message'] . PHP_EOL;
+  $output .= 'Message: ' . $data['form']['message'] . PHP_EOL;
   if (count($attachs)) {
-    $output .= 'Файлы:' . PHP_EOL;
+    $output .= 'Files:' . PHP_EOL;
     foreach ($attachs as $attach) {
       $output .= $attach . PHP_EOL;
     }
