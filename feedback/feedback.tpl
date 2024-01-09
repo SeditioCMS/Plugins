@@ -24,8 +24,8 @@
 
 					<!-- Сообщение пользователя -->
 					<div class="form-group">
-						<label for="name" class="control-label">Тема письма</label>
-						<input id="name" type="text" name="subject" class="form-control" value="" placeholder="Тема письма" minlength="5" maxlength="180" required="required">
+						<label for="name" class="control-label">Letter subject</label>
+						<input id="name" type="text" name="subject" class="form-control" value="" placeholder="subject" minlength="5" maxlength="180" required="required">
 						<div class="invalid-feedback"></div>
 					</div>
 
@@ -33,15 +33,15 @@
 
 						<!-- Имя пользователя -->
 						<div class="form-group">
-							<label for="name" class="control-label">Имя</label>
-							<input id="name" type="text" name="name" class="form-control" value="" placeholder="Имя" minlength="2" maxlength="30" required="required">
+							<label for="name" class="control-label">Name</label>
+							<input id="name" type="text" name="name" class="form-control" value="" placeholder="Name" minlength="2" maxlength="30" required="required">
 							<div class="invalid-feedback"></div>
 						</div>
 
 						<!-- Email пользователя -->
 						<div class="form-group">
-							<label for="email" class="control-label">Email-адрес</label>
-							<input id="email" type="email" name="email" required="required" class="form-control" value="" placeholder="Email-адрес">
+							<label for="email" class="control-label">Email address</label>
+							<input id="email" type="email" name="email" required="required" class="form-control" value="" placeholder="Email address">
 							<div class="invalid-feedback"></div>
 						</div>
 
@@ -49,18 +49,18 @@
 
 					<!-- Сообщение пользователя -->
 					<div class="form-group">
-						<label for="message" class="control-label">Сообщение (не менее 20 символов)</label>
-						<textarea id="message" name="message" class="form-control" rows="3" placeholder="Сообщение (не менее 20 символов)" minlength="20" maxlength="500" required="required"></textarea>
+						<label for="message" class="control-label">Message (at least 20 characters)</label>
+						<textarea id="message" name="message" class="form-control" rows="3" placeholder="Message (at least 20 characters)" minlength="20" maxlength="500" required="required"></textarea>
 						<div class="invalid-feedback"></div>
 					</div>
 
 					<!-- Файлы, для прикрепления к форме -->
 					<div class="form-group form-attach" data-count="5">
-						<div class="form-attach__label">Файлы (не более <span class="form-attach__count">5</span>)</div>
+						<div class="form-attach__label">Files (no more than <span class="form-attach__count">5</span>)</div>
 						<div class="form-attach__wrapper">
 							<input type="file" name="attach[]" multiple>
 							<div class="form-attach__description">
-								<div>Нажмите для загрузки файлов или перетащите их</div>
+								<div>Click to upload files or drag and drop them</div>
 								<div class="text-sm">PNG, JPG, GIF, DOC, XLS, PDF (до 2 Mb)</div>
 							</div>
 							<div class="form-attach__items"></div>
@@ -70,7 +70,7 @@
 
 					<!-- Капча -->
 					<div class="form-group form-captcha">
-						<img class="form-captcha__image" src="plugins/feedback/captcha/captcha.php" data-src="plugins/feedback/captcha/captcha.php" width="132" height="46" alt="Капча">
+						<img class="form-captcha__image" src="plugins/feedback/captcha/captcha.php" data-src="plugins/feedback/captcha/captcha.php" width="132" height="46" alt="Captcha">
 						<div class="form-captcha__refresh">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16">
 								<path fill="currentColor"
@@ -79,7 +79,7 @@
 							</svg>
 						</div>
 						<div class="form-group form-captcha__input">
-							<label for="captcha" class="control-label d-none">Код, показанный на изображении</label>
+							<label for="captcha" class="control-label d-none">Code shown in the image</label>
 							<input type="text" name="captcha" maxlength="6" required="required" id="captcha" class="form-control captcha" placeholder="******" autocomplete="off" value="">
 							<div class="invalid-feedback"></div>
 						</div>
@@ -88,24 +88,24 @@
 					<!-- Пользовательское солашение -->
 					<div class="form-group form-agree form-check">
 						<input class="form-check-input" type="checkbox" name="agree" id="agree" required value="true">
-						<label class="form-check-label" for="agree">Нажимая кнопку, я принимаю условия <a href="/termsofuse">Пользовательского
-								соглашения</a> и даю своё согласие на обработку моих персональных данных</label>
+						<label class="form-check-label" for="agree">By clicking the button, I accept the terms and conditions <a href="termsofuse">Custom
+agreements</a> and I give my consent to the processing of my personal data</label>
 						<div class="invalid-feedback"></div>
 					</div>
 
 					<!-- Сообщение об ошибке -->
-					<div class="form-error form-error_hide">Исправьте данные и отправьте форму ещё раз.</div>
+					<div class="form-error form-error_hide">Correct the information and submit the form again.</div>
 
 					<!-- Кнопка для отправки формы на сервер -->
 					<div class="form-submit">
-						<button type="submit">Отправить сообщение</button>
+						<button type="submit">Send a message</button>
 					</div>
 
 				</form>
 
 				<!-- Сообщение об успешной отправки формы -->
 				<div class="form-success form-success_hide">
-					<div class="form-success__message">Форма успешно отправлена. Нажмите <button type="button" class="form-success__btn">здесь</button>, если нужно отправить ещё одну форму.</div>
+					<div class="form-success__message">The form has been submitted successfully. Click <button type="button" class="form-success__btn">Here</button>, if you need to submit another form.</div>
 				</div>
 
 			</div>
