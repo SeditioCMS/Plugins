@@ -15,10 +15,10 @@
             <tr>
               <td bgcolor="#fff" style="padding: 15px;">
 
-                <p>Здравствуйте <b>%name%</b>, ваше сообщение доставлено.</p>
-                <p>На данное письмо отвечать не надо.</p>
+                <p>Hello <b>%name%</b>, your message has been delivered.</p>
+                <p>There is no need to respond to this letter.</p>
                 <hr>
-                Дата отправки: <b>%date%</b>
+                Departure date: <b>%date%</b>
 
               </td>
             </tr>
@@ -27,7 +27,7 @@
             </tr>
             <tr>
               <td bgcolor="#fff" style="padding: 20px 15px; color: #777; font-size: 14px;">
-                <p>&copy; 2022 Мой сайт.</p>
+                <p>&copy; 2022 My site.</p>
               </td>
             </tr>
           </tbody>
