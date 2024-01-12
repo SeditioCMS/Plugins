@@ -1,66 +1,70 @@
 <!-- BEGIN: MAIN -->
-
-<main id="plugins">
-
-	<div class="container">
-
-		<div class="section-title">
-
-			{BREADCRUMBS}
-
-			<h1>{PLUGIN_FEEDBACK_TITLE}</h1>
-
-			<div class="section-desc">
-
+ <div class="card">
+            <div class="card-header">
+              <div class="row justify-content-between">
+                <div class="col-md-auto">
+                 {PLUGIN_FEEDBACK_TITLE}
+                </div>
+                <div class="col-md-auto">
+				 {BREADCRUMBS}
+				
+				</div>
+              </div>
+            </div>
 			</div>
+<br>
 
-		</div>
-
+ <div class="card mb-3">
+            <div class="card-header">
+              <div class="row flex-between-end">
+			  
+<main id="plugins">
+<div class="container">
 		<div class="section-body">
 
 			<div class="form-container form__wrapper">
-				<!-- Форма обратной связи -->
+				<!-- Feedback form -->
 				<form id="feedback-form" action="plug/?ajx=feedback" enctype="multipart/form-data" novalidate>
 
-					<!-- Сообщение пользователя -->
+					<!-- User message -->
 					<div class="form-group">
-						<label for="subject" class="control-label">Letter subject</label>
+						<label for="subject" class="control-label">Mail Başlığı</label>
 						<input id="subject" type="text" name="subject" class="form-control" value="" placeholder="subject" minlength="5" maxlength="180" required="required">
 						<div class="invalid-feedback"></div>
 					</div>
 
 					<div class="form-row">
 
-						<!-- Имя пользователя -->
+						<!-- Username -->
 						<div class="form-group">
-							<label for="name" class="control-label">Name</label>
+							<label for="name" class="control-label">isim</label>
 							<input id="name" type="text" name="name" class="form-control" value="" placeholder="Name" minlength="2" maxlength="30" required="required">
 							<div class="invalid-feedback"></div>
 						</div>
 
-						<!-- Email пользователя -->
+						<!-- User email -->
 						<div class="form-group">
-							<label for="email" class="control-label">Email address</label>
+							<label for="email" class="control-label">Email adres</label>
 							<input id="email" type="email" name="email" required="required" class="form-control" value="" placeholder="Email address">
 							<div class="invalid-feedback"></div>
 						</div>
 
 					</div>
 
-					<!-- Сообщение пользователя -->
+					<!-- User message -->
 					<div class="form-group">
-						<label for="message" class="control-label">Message (at least 20 characters)</label>
+						<label for="message" class="control-label">Mesaj (en az 20 karakter)</label>
 						<textarea id="message" name="message" class="form-control" rows="3" placeholder="Message (at least 20 characters)" minlength="20" maxlength="500" required="required"></textarea>
 						<div class="invalid-feedback"></div>
 					</div>
 
-					<!-- Файлы, для прикрепления к форме -->
+					<!-- Files to attach to the form -->
 					<div class="form-group form-attach" data-count="5">
-						<div class="form-attach__label">Files (no more than <span class="form-attach__count">5</span>)</div>
+						<div class="form-attach__label">Dosyalar (en fazla <span class="form-attach__count">5</span>) olmalı</div>
 						<div class="form-attach__wrapper">
 							<input type="file" name="attach[]" multiple>
 							<div class="form-attach__description">
-								<div>Click to upload files or drag and drop them</div>
+								<div>Dosyaları yüklemek için tıklayın veya sürükleyip bırakın</div>
 								<div class="text-sm">PNG, JPG, GIF, DOC, XLS, PDF (до 2 Mb)</div>
 							</div>
 							<div class="form-attach__items"></div>
@@ -68,7 +72,7 @@
 						<div class="invalid-feedback"></div>
 					</div>
 
-					<!-- Капча -->
+					<!-- Captcha -->
 					<div class="form-group form-captcha">
 						<img class="form-captcha__image" src="plugins/feedback/captcha/captcha.php" data-src="plugins/feedback/captcha/captcha.php" width="132" height="46" alt="Captcha">
 						<div class="form-captcha__refresh">
@@ -79,33 +83,32 @@
 							</svg>
 						</div>
 						<div class="form-group form-captcha__input">
-							<label for="captcha" class="control-label d-none">Code shown in the image</label>
+							<label for="captcha" class="control-label d-none">Resimde gösterilen kod</label>
 							<input type="text" name="captcha" maxlength="6" required="required" id="captcha" class="form-control captcha" placeholder="******" autocomplete="off" value="">
 							<div class="invalid-feedback"></div>
 						</div>
 					</div>
 
-					<!-- Пользовательское солашение -->
+					<!-- Terms of use -->
 					<div class="form-group form-agree form-check">
 						<input class="form-check-input" type="checkbox" name="agree" id="agree" required value="true">
-						<label class="form-check-label" for="agree">By clicking the button, I accept the terms and conditions <a href="termsofuse">Custom
-agreements</a> and I give my consent to the processing of my personal data</label>
+						<label class="form-check-label" for="agree">Buraya tıklayarak şartlar ve koşulları kabul ediyorum. <a href="termsofuse">Aydınlatma metni </a> ve kişisel verilerimin işlenmesine onay veriyorum</label>
 						<div class="invalid-feedback"></div>
 					</div>
 
-					<!-- Сообщение об ошибке -->
-					<div class="form-error form-error_hide">Correct the information and submit the form again.</div>
+					<!-- Error message -->
+					<div class="form-error form-error_hide">Bilgileri düzeltip formu tekrar gönderin.</div>
 
-					<!-- Кнопка для отправки формы на сервер -->
+					<!-- Button to submit the form to the server -->
 					<div class="form-submit">
-						<button type="submit">Send a message</button>
+						<button type="submit">Gönder</button>
 					</div>
 
 				</form>
 
-				<!-- Сообщение об успешной отправки формы -->
+				<!-- Message about successful form submission -->
 				<div class="form-success form-success_hide">
-					<div class="form-success__message">The form has been submitted successfully. Click <button type="button" class="form-success__btn">Here</button>, if you need to submit another form.</div>
+					<div class="form-success__message">Form başarıyla gönderildi. Başka bir form göndermeniz gerekiyorsa <button type="button" class="form-success__btn">Buraya</button> tıklayın.</div>
 				</div>
 
 			</div>
@@ -138,4 +141,9 @@ agreements</a> and I give my consent to the processing of my personal data</labe
 
 </main>
 
+</div>
+
+		</div>
+		
+	</div>
 <!-- END: MAIN -->

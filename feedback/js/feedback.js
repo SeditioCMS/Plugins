@@ -89,7 +89,7 @@ class ItcSubmitForm {
       const isRequired = elAttach.querySelector('[type="file"]').required;
       if (isRequired && this._attach.items.length === 0) {
         elAttach.classList.add('is-invalid');
-        elAttach.querySelector('.invalid-feedback').textContent = 'Заполните это поле.';
+        elAttach.querySelector('.invalid-feedback').textContent = 'Bu alanı doldurun.';
       }
     }
     this._attach.items.forEach((item) => {

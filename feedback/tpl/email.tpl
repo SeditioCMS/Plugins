@@ -14,13 +14,13 @@
             </tr>
             <tr>
               <td bgcolor="#fff" style="padding: 15px;">
-                User <b>%name%</b> left the following message:
+                Gönderen <b>%name%</b>:
                 <hr>
                 %message%
                 <hr>
                 User email: <b>%email%</b>
                 <br>
-                Departure date: <b>%date%</b>
+                Tarih: <b>%date%</b>
                 <br>
                 %attachs%
               </td>
@@ -30,7 +30,7 @@
             </tr>
             <tr>
               <td bgcolor="#fff " style="padding: 20px 15px; color: #777; font-size: 14px;">
-                <p>&copy; 2022 BATTERY.</p>
+                <p><script>document.write(new Date().getFullYear());</script> &copy; Seditio.com.tr</p>
               </td>
             </tr>
           </tbody>

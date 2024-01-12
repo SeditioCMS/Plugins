@@ -87,17 +87,17 @@ define('HAS_SEND_EMAIL', true);
 // whether to add attached files to the body of the letter in the form of links
 define('HAS_ATTACH_IN_BODY', false);
 const EMAIL_SETTINGS = array(
-  'addresses' => ['admin@***.org'], // who needs to send a letter
-  'from' => ['bilgi@****.com', 'Kaan'], // from what email and name should the letter be sent?
-  'subject' => 'Message from the feedback form Seditio.com.tr', // letter subject
-  'host' => 'mail.***.com', // SMTP-хост
-  'username' => 'bilgi@***.com', // // SMTP-пользователь
-  'password' => '****', // SMTP-пароль
-  'port' => '587' // SMTP-порт
+  'addresses' => ['bilgi@***.com'], // who needs to send a letter
+  'from' => ['root@***.org', 'Dimitri'], // from what email and name should the letter be sent?
+  'subject' => 'Seditio.com.tr geri bildirim formundan mesaj', // letter subject
+  'host' => 'mail.****.com', // SMTP-host
+  'username' => 'bilgi@***.com', // // SMTP-user
+  'password' => '******', // SMTP-password
+  'port' => '587' // SMTP-port
 );
-define('HAS_SEND_NOTIFICATION', false);
-define('BASE_URL', 'http://localhost/seditio.com.tr/');
-define('SUBJECT_FOR_CLIENT', 'Your message has been delivered');
+define('HAS_SEND_NOTIFICATION', true);
+define('BASE_URL', 'http://localhost/seditio/');
+define('SUBJECT_FOR_CLIENT', 'Mesajınız iletildi');
 //
 define('HAS_WRITE_TXT', true);
 
@@ -147,8 +147,8 @@ if (!empty($_POST['message'])) {
   $data['form']['message'] = htmlspecialchars($_POST['message']);
   if (mb_strlen($data['form']['message'], 'UTF-8') < 20) {
     $data['result'] = 'error';
-    $data['errors']['message'] = 'This field must be at least 20 characters long.';
-    itc_log('The message field must be at least 20 characters long.');
+    $data['errors']['message'] = 'Bu alan en az 20 karakter uzunluğunda olmalıdır.';
+    itc_log('Mesaj alan en az 20 karakter uzunluğunda olmalıdır.');
   }
 } else {
   $data['result'] = 'error';
@@ -263,10 +263,10 @@ if ($data['result'] == 'success' && HAS_SEND_EMAIL == true) {
     //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
     $mail->isSMTP();
     $mail->Host = EMAIL_SETTINGS['host'];
-    $mail->SMTPAuth = true;
+    $mail->SMTPAuth = true; 
     $mail->Username = EMAIL_SETTINGS['username'];
     $mail->Password = EMAIL_SETTINGS['password'];
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    //$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port = EMAIL_SETTINGS['port'];
     //Recipients
     $mail->setFrom(EMAIL_SETTINGS['from'][0], EMAIL_SETTINGS['from'][1]);

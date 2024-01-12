@@ -15,10 +15,10 @@
             <tr>
               <td bgcolor="#fff" style="padding: 15px;">
 
-                <p>Hello <b>%name%</b>, your message has been delivered.</p>
-                <p>There is no need to respond to this letter.</p>
+                <p>Merhaba <b>%name%</b>, mesajınız teslim edildi..</p>
+                <p>Bu maile cevap vermeye gerek yok.</p>
                 <hr>
-                Departure date: <b>%date%</b>
+                Tarih: <b>%date%</b>
 
               </td>
             </tr>
@@ -27,7 +27,7 @@
             </tr>
             <tr>
               <td bgcolor="#fff" style="padding: 20px 15px; color: #777; font-size: 14px;">
-                <p>&copy; 2022 My site.</p>
+                <p><script>document.write(new Date().getFullYear());</script> &copy; Seditio.com.tr</p>
               </td>
             </tr>
           </tbody>
