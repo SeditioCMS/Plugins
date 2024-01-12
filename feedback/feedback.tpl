@@ -20,12 +20,12 @@
 
 			<div class="form-container form__wrapper">
 				<!-- Форма обратной связи -->
-				<form id="feedback-form" action="plug.php?ajx=feedback" enctype="multipart/form-data" novalidate>
+				<form id="feedback-form" action="plug/?ajx=feedback" enctype="multipart/form-data" novalidate>
 
 					<!-- Сообщение пользователя -->
 					<div class="form-group">
-						<label for="name" class="control-label">Letter subject</label>
-						<input id="name" type="text" name="subject" class="form-control" value="" placeholder="subject" minlength="5" maxlength="180" required="required">
+						<label for="subject" class="control-label">Letter subject</label>
+						<input id="subject" type="text" name="subject" class="form-control" value="" placeholder="subject" minlength="5" maxlength="180" required="required">
 						<div class="invalid-feedback"></div>
 					</div>
 

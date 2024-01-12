@@ -10,8 +10,8 @@ class ItcSubmitForm {
     this._attach = {
       index: 0,
       maxItems: config['attachMaxItems'] || 5,
-      maxFileSize: config['attachMaxFileSize'] || 2048, // максимальный размер файла
-      ext: ['jpg', 'jpeg', 'bmp', 'gif', 'png', 'doc', 'docx', 'xls', 'xlsx', 'pdf'], // дефолтные допустимые расширения для файлов
+      maxFileSize: config['attachMaxFileSize'] || 2048, // maximum file size
+      ext: ['jpg', 'jpeg', 'bmp', 'gif', 'png', 'doc', 'docx', 'xls', 'xlsx', 'pdf'], // default valid file extensions
       items: []
     };
     this._isCheckValidationOnClient = config['isCheckValidationOnClient'] !== false;
@@ -19,15 +19,15 @@ class ItcSubmitForm {
     this._init();
   }
 
-  // проверка расширения файла
+  // checking file extension
   static _checkExt(filename, ext) {
-    // расширение файла
+    // file extension
     const extFile = filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2);
-    // проверка на соответствие допустимому
+    // checking for compliance with acceptable
     return ext.indexOf(extFile.toLowerCase()) !== -1;
   }
 
-  // статический метод для получения шаблона form-attach__item
+  // static method to get template form-attach__item
   static _getAttachTemplate(id, file, target) {
     const itemImg = target ? `<img class="form-attach__image" src="${target.result}" alt="${file.name}"></img>` : '';
     return `<div class="form-attach__item" data-index="${id}" data-id="${id}">
@@ -38,7 +38,7 @@ class ItcSubmitForm {
     </div>`;
   }
 
-  // получение новой капчи
+  // getting a new captcha
   _reloadСaptcha() {
     var captchaImg = this._elForm.querySelector('.form-captcha__image');
     var captchaSrc = captchaImg.getAttribute('data-src');
@@ -47,7 +47,7 @@ class ItcSubmitForm {
     captchaImg.setAttribute('src', captchaNewSrc);
   }
 
-  // установка статуса валидации
+  // setting validation status
   _setStateValidaion(input, state, message) {
     const className = state === 'success' ? 'is-valid' : 'is-invalid';
     const text = state === 'success' ? '' : message;
@@ -66,7 +66,7 @@ class ItcSubmitForm {
     }
   }
 
-  // валидация формы
+  // form validation
   _checkValidity() {
     let valid = true;
     // input, textarea
@@ -107,7 +107,7 @@ class ItcSubmitForm {
     return valid;
   }
 
-  // собираем данные для отправки на сервер
+  // collect data to send to the server
   _getFormData() {
     const formData = new FormData(this._elForm);
     formData.delete('attach[]');
@@ -117,7 +117,7 @@ class ItcSubmitForm {
     return formData;
   };
 
-  // при получении успешного ответа от сервера
+  // upon receiving a successful response from the server
   _successXHR(data) {
     const elAttach = this._elForm.querySelector('.form-attach');
     if (elAttach) {
@@ -128,7 +128,7 @@ class ItcSubmitForm {
       this._setStateValidaion(el);
     });
 
-    // при успешной отправки формы
+    // upon successful submission of the form
     if (data['result'] === 'success') {
       this._elForm.dispatchEvent(new Event('success'));
       return;
@@ -136,7 +136,7 @@ class ItcSubmitForm {
 
     this._elForm.querySelector('.form-error').classList.remove('form-error_hidden');
 
-    // выводим ошибки
+    // display errors
     for (let key in data['errors']) {
       if (key === 'attach') {
         const attachs = data['errors'][key];
@@ -158,7 +158,7 @@ class ItcSubmitForm {
         el ? this._setStateValidaion(el, 'error', data['errors'][key]) : null;
       }
     }
-    // к полям, отвечающим требованиям, добавляем класс is-valid
+    // add the is-valid class to the fields that meet the requirements
     this._elForm.querySelectorAll('.form-attach__item:not(.is-invalid), input:not(.is-invalid), textarea:not(.is-invalid)').forEach(el => {
       this._setStateValidaion(el, 'success', '');
     })
@@ -167,7 +167,7 @@ class ItcSubmitForm {
       console.log(message);
     });
 
-    // устанавливаем фокус на не валидный элемент
+    // set focus to an invalid element
     const elInvalid = this._elForm.querySelector('.is-invalid');
     if (elInvalid) {
       if (elInvalid.classList.contains('form-attach')) {
@@ -182,7 +182,7 @@ class ItcSubmitForm {
     this._elForm.querySelector('.form-error').classList.remove('d-none');
   }
 
-  // отправка формы
+  // submitting the form
   _onSubmit() {
     this._elForm.dispatchEvent(new Event('before-send'));
     if (this._isCheckValidationOnClient) {
@@ -226,7 +226,7 @@ class ItcSubmitForm {
     xhr.send(this._getFormData());
   };
 
-  // функция для инициализации
+  // function for initialization
   _init() {
     const elFormAttachCount = this._elForm.querySelector('.form-attach__count');
     elFormAttachCount ? elFormAttachCount.textContent = this._attach.maxItems : null;
@@ -234,14 +234,14 @@ class ItcSubmitForm {
     this._addEventListener();
   }
 
-  // добавляем обработчики для событий
+  // adding event handlers
   _addEventListener() {
-    // обработка события submit
+    // handle the submit event
     this._elForm.addEventListener('submit', (e) => {
       e.preventDefault();
       this._onSubmit();
     });
-    // обработка события click
+    // event processing click
     this._elForm.addEventListener('click', (e) => {
       const target = e.target;
       if (target.closest('.form-captcha__refresh')) {
@@ -259,7 +259,7 @@ class ItcSubmitForm {
         });
       }
     })
-    // обработка события change
+    // event processing change
     this._elForm.addEventListener('change', (e) => {
       const target = e.target;
       if (target.name !== 'attach[]') {
@@ -289,7 +289,7 @@ class ItcSubmitForm {
       target.value = '';
     });
   }
-  // сброс формы
+  // form reset
   reset() {
     if (this._elForm.querySelector('.form-error')) {
       this._elForm.querySelector('.form-error').classList.add('form-error_hide');
