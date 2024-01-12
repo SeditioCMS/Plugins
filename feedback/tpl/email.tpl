@@ -30,7 +30,7 @@
             </tr>
             <tr>
               <td bgcolor="#fff " style="padding: 20px 15px; color: #777; font-size: 14px;">
-                <p><script>document.write(new Date().getFullYear());</script> &copy; Seditio.com.tr</p>
+                <p> &copy; Seditio.com.tr</p>
               </td>
             </tr>
           </tbody>
