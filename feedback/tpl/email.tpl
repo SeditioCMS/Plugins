@@ -14,13 +14,13 @@
             </tr>
             <tr>
               <td bgcolor="#fff" style="padding: 15px;">
-                Gönderen <b>%name%</b>:
+                Пользователь <b>%name%</b> оставил следующее сообщение:
                 <hr>
                 %message%
                 <hr>
-                User email: <b>%email%</b>
+                Email пользователя: <b>%email%</b>
                 <br>
-                Tarih: <b>%date%</b>
+                Дата отправки: <b>%date%</b>
                 <br>
                 %attachs%
               </td>
@@ -30,7 +30,7 @@
             </tr>
             <tr>
               <td bgcolor="#fff " style="padding: 20px 15px; color: #777; font-size: 14px;">
-                <p> &copy; Seditio.com.tr</p>
+                <p>&copy; 2022 БАТАРЕЯ.</p>
               </td>
             </tr>
           </tbody>

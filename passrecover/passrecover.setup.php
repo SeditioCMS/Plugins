@@ -6,8 +6,8 @@ Copyright Neocrome & Seditio Team
 https://seditio.org
 [BEGIN_SED]
 File=plugins/passrecover/passrecover.setup.php
-Version=179
-Updated=2022-aug-03
+Version=180
+Updated=2025-jan-25
 Type=Plugin
 Author=Seditio Team
 Description=
@@ -17,7 +17,7 @@ Description=
 Code=passrecover
 Name=Password recovery
 Description=Sends emails to users so they can recover their lost passwords
-Version=179
+Version=180
 Date=2022-aug-03
 Author=Seditio Team
 Copyright=

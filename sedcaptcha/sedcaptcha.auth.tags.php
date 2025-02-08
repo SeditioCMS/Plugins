@@ -6,8 +6,8 @@ http://seditio.org
 
 [BEGIN_SED]
 File=plugins/sedcaptcha/sedcaptcha.auth.tags.php
-Version=179
-Updated=2022-jun-09
+Version=180
+Updated=2025-jan-25
 Type=Plugin
 Author=Amro
 Description=Plugin to protect the registration process with a Cool PHP Captcha.

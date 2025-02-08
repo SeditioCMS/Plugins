@@ -7,8 +7,8 @@ https://seditio.org
 
 [BEGIN_SED]
 File=plugins/recentitems/recentitems.php
-Version=179
-Updated=2013-jul-08
+Version=180
+Updated=2025-jan-25
 Type=Plugin
 Author=Seditio Team
 Description=

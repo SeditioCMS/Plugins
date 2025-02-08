@@ -4,10 +4,11 @@
 Seditio - Website engine
 Copyright Neocrome & Seditio Team
 https://seditio.org
+
 [BEGIN_SED]
 File=plugins/ckeditor/ckeditor.pfs.stndl.php
-Version=179
-Updated=2022-jul-18
+Version=180
+Updated=2025-jan-23
 Type=Plugin
 Author=Amro
 Description=
@@ -56,7 +57,11 @@ function addfile_pageurl(gfile)
 	{ 
 	" . $openerparent . ".document." . $c1 . "." . $c2 . ".value += gfile; " . $auto_popup_close . " 
 	}
-
+function addvideo(gfile)
+	{
+	var html = '<div class=\"ckeditor-html5-video\" style=\"text-align: center;\"><video controls=\"controls\" src=\"'+gfile+'\"></video></div>';
+	window." . $openerparent . ".CKEDITOR.instances['" . $c2 . "'].insertHtml(html); " . $auto_popup_close . "
+	}
 //-->
 </script>
 ";

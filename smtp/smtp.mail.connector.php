@@ -7,8 +7,8 @@ http://www.neocrome.net
 http://www.seditio.org
 [BEGIN_SED]
 File=plugins/smtp/smtp.mail.connector.php
-Version=179
-Updated=2021-dec-07
+Version=180
+Updated=2025-jan-31
 Type=Plugin
 Author=Amro
 Description=
@@ -43,7 +43,7 @@ if ($smtp_active == 'yes') {
 	$smtp_from = $cfg['plugin']['smtp']['smtp_from'];
 	$smtp_from_title = $cfg['plugin']['smtp']['smtp_from_title'];
 	$smtp_from_title = (!empty($smtp_from_title)) ? $smtp_from_title : $cfg['maintitle'];
-	$smtp_ssl = ($cfg['plugin']['smtp']['smtp_ssl'] == 'yes') ? 'ssl' : '';
+	$smtp_tls = ($cfg['plugin']['smtp']['smtp_ssl'] == 'yes') ? 'ssl' : 'tls';
 	$smtp_connection_timeout = 30;
 	$smtp_response_timeout = 8;
 
@@ -53,31 +53,36 @@ if ($smtp_active == 'yes') {
 
 	$c_body .= ($c_content == "html") ? "<p>" . $cfg['maintitle'] . " - " . $cfg['mainurl'] . "</p>" : "\n\n" . $cfg['maintitle'] . " - " . $cfg['mainurl'];
 
-	$mail_type = ($c_content == 'plain') ? false : true;
+	$mail = new Email($smtp_host, $smtp_port, $smtp_connection_timeout, $smtp_response_timeout, $smtp_tls);
 
-	$mail = new Email($smtp_host, $smtp_port, $smtp_connection_timeout, $smtp_response_timeout, $smtp_ssl);
+	if ($smtp_debug == "yes") {
+		$mail->setLogFile(SED_ROOT . '/plugins/smtp/log/log.txt');
+	}
 
 	$mail->setLogin($smtp_login, $smtp_pass);
+
 	$mail->addTo($c_fmail, $c_fmail);
 
 	$mail->setFrom($smtp_from, $smtp_from_title);
-	$mail->setSubject($c_subject);
-	$mail->setMessage($c_body, $mail_type);
 
-	if (is_array($c_attach)) $mail->setAttach($c_attach);
+	$mail->setSubject($c_subject);
+
+	if (isset($c_attach) && is_array($c_attach)) {
+		foreach ($c_attach as $attach) {
+			$mail->addAttachment($attach);
+		}
+	}
+
+	if ($c_content == 'html') {
+		$mail->setHTML($c_body);
+	} else {
+		$mail->setText($c_body);
+	}
 
 	if ($mail->send()) {
-		if ($smtp_debug == "yes") {
-			$log = $mail->getLog();
-			file_put_contents(SED_ROOT . '/plugins/smtp/log/log.txt', $log, FILE_APPEND | LOCK_EX);
-		}
 		sed_stat_inc('totalmailsent');
-		return (TRUE);
+		return (TRUE); // Email sent successfully!
 	} else {
-		if ($smtp_debug == "yes") {
-			$log = $mail->getLog();
-			file_put_contents(SED_ROOT . '/plugins/smtp/log/log.txt', $log, FILE_APPEND | LOCK_EX);
-		}
-		return (FALSE);
+		return (FALSE); // Failed to send email!
 	}
 }
