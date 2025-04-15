@@ -1,0 +1,6 @@
+You can use it in all .tpl files related to pages.
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+  <div class="prev-page">{NEXT_PAGE}</div>
+  <div class="next-page" style="text-align: right;">{PREV_PAGE}</div>
+</div>
