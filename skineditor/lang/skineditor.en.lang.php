@@ -4,6 +4,7 @@
 Seditio - Website engine
 Copyright Neocrome & Seditio Team
 https://seditio.org
+
 [BEGIN_SED]
 File=plugins/lang/skineditor.en.lang.php
 Version=180
@@ -13,7 +14,6 @@ Author=Seditio Team
 Description=
 [END_SED]
 ==================== */
-
 
 $L['plu_makbak'] = "Backup now";
 $L['plu_delbak'] = "Delete the backup";

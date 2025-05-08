@@ -3,12 +3,12 @@
 /* ====================
 Seditio - Website engine
 Copyright Neocrome & Seditio Team
-https://seditiocms.com
+https://seditio.org
 
 [BEGIN_SED]
-File=plugins/syntaxhighlight//lang/syntaxhighlight.tr.lang.php
-Version=178
-Updated=2012-feb-16
+File=plugins/syntaxhighlight/lang/syntaxhighlight.ru.lang.php
+Version=180
+Updated=2025-feb-16
 Type=Plugin
 Author=Amro
 Description=
@@ -16,6 +16,4 @@ Description=
 
 ==================== */
 
-$L['cfg_syntaxhighlight_theme'] = array("Syntaxhighlight renk teması", "");
-
-?>
+$L['cfg_syntaxhighlight_theme'] = array("Sözdizimi vurgulama tema rengi", "");

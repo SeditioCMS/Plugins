@@ -3,54 +3,54 @@
 /* ====================
 Seditio - Website engine
 Copyright Neocrome & Seditio Team
-https://seditiocms.com
+https://seditio.org
+
 [BEGIN_SED]
-File=plugins/lang/statistics.tr.lang.php
-Version=178
-Updated=2022-jun-12
+File=plugins/statistics/lang/statistics.tr.lang.php
+Version=180
+Updated=2025-jan-25
 Type=
 Author=Seditio Team
 Description=
 [END_SED]
 ==================== */
 
-
-$L['plu_title'] = "İstatistik";
-$L['plu_totalpagessince'] = "Şu tarihten beri görüntülenen toplam sayfa sayısı";
-$L['plu_maxwasreached'] = "Maksimum isabet sayısına ulaşıldı";
-$L['plu_pagesdisplayedthisday'] = "sayfalar bu gün görüntülendi.";
-$L['plu_totalmails'] = "Gönderilen postalar";
-$L['plu_totalpms'] = "Özel mesajlar gönderildi";
+$L['plu_title'] = "İstatistikler";
+$L['plu_totalpagessince'] = "Görüntülenen toplam sayfa sayısı (başlangıç)";
+$L['plu_maxwasreached'] = "Maksimum hit sayısına ulaşıldı";
+$L['plu_pagesdisplayedthisday'] = "sayfa bu gün görüntülendi.";
+$L['plu_totalmails'] = "Gönderilen e-posta sayısı";
+$L['plu_totalpms'] = "Gönderilen özel mesaj sayısı";
 $L['plu_totalactivepms'] = "Aktif mesajlar";
 $L['plu_totalarchivedpms'] = "Arşivlenmiş mesajlar";
 $L['plu_dbpages'] = "Sayfalar";
+$L['plu_dblinks'] = "Bağlantılar";
+$L['plu_dbevents'] = "Etkinlikler";
 $L['plu_dbcomments'] = "Yorumlar";
-$L['plu_dbnews'] = "Yeni başlıklar";
-$L['plu_pruned'] = "Pruned";
+$L['plu_dbnews'] = "Haber başlıkları";
+$L['plu_pruned'] = "Temizlendi";
 $L['plu_flag'] = "Bayrak";
 $L['plu_country'] = "Ülke";
 $L['plu_registeredusers'] = "Kayıtlı üyeler";
-$L['plu_membersbycountry'] = "Kayıtlı üyeler, ülkeye göre";
+$L['plu_membersbycountry'] = "Ülkeye göre kayıtlı üyeler";
 $L['plu_pm'] = "Özel mesajlar";
-$L['plu_pollsratings'] = "Anketler ve derecelendirmeler";
+$L['plu_pollsratings'] = "Anketler ve oylamalar";
 $L['plu_pfs'] = "Kişisel Dosya Alanı";
-$L['plu_pfsspace'] = "Tüm PFS'deki toplam dosya sayısı";
-$L['plu_pfssize'] = "PFS toplam boyutu";
+$L['plu_pfsspace'] = "Tüm KDA'daki toplam dosya sayısı";
+$L['plu_pfssize'] = "KDA toplam boyutu";
 $L['plu_contributions'] = "Katkılarınız";
-$L['plu_notloggedin'] = "Mevcut değil, giriş yapmadınız.";
-$L['plu_viewsforums'] = "Forumlardaki görünümler";
+$L['plu_notloggedin'] = "Kullanılamaz, giriş yapmadınız.";
+$L['plu_viewsforums'] = "Forumlardaki görüntülemeler";
 $L['plu_postsforums'] = "Forumlardaki gönderiler";
 $L['plu_topicsforums'] = "Forumlardaki konular";
-$L['plu_newtopicsforums'] = "Forumlarda yeni konular";
+$L['plu_newtopicsforums'] = "Forumlardaki yeni konular";
 $L['plu_comments'] = "Yorumlar";
 
-$L['plu_pagesrated'] = "Derecelendirilen sayfalar";
-$L['plu_votesratings'] = "Derecelendirmeler için oylar";
+$L['plu_pagesrated'] = "Oylanan sayfalar";
+$L['plu_votesratings'] = "Oylamalar için verilen oy sayısı";
 $L['plu_polls'] = "Anketler";
-$L['plu_votespolls'] = "Anketler için oylar";
+$L['plu_votespolls'] = "Anketler için verilen oy sayısı";
 
 $L['plu_usersfrom'] = "Bu ülkeden üyeler";
-$L['plu_unknown'] = "Bilinmiyor veya ayarlanmadı";
+$L['plu_unknown'] = "Bilinmiyor veya ayarlanmamış";
 $L['plu_total'] = "Toplam :";
-
-?>

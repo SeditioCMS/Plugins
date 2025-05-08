@@ -3,12 +3,12 @@
 /* ====================
 Seditio - Website engine
 Copyright Neocrome & Seditio Team
-https://seditiocms.com
+https://seditio.org
 
 [BEGIN_SED]
-File=plugins/recentitems/lang/recentitems.tr.lang.php
-Version=178
-Updated=2012-may-16
+File=plugins/recentitems/lang/recentitems.ru.lang.php
+Version=180
+Updated=2025-jan-25
 Type=Plugin
 Author=Seditio Team
 Description=
@@ -18,5 +18,3 @@ Description=
 $L['cfg_maxpages'] = array("Görüntülenecek sayfa sayısı", "");
 $L['cfg_maxtopics'] = array("Görüntülenecek konu sayısı", "");
 $L['cfg_maxpolls'] = array("Görüntülenecek anket sayısı", "");
-
-?>

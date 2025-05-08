@@ -3,12 +3,12 @@
 /* ====================
 Seditio - Website engine
 Copyright Neocrome & Seditio Team
-https://seditiocms.com
+https://seditio.org
 
 [BEGIN_SED]
 File=plugins/news/lang/news.tr.lang.php
-Version=178
-Updated=2012-may-16
+Version=180
+Updated=2025-jan-25
 Type=Plugin
 Author=Seditio Team
 Description=
@@ -16,6 +16,4 @@ Description=
 ==================== */
 
 $L['cfg_category'] = array("Üst kategori kodu", "");
-$L['cfg_maxpages'] = array("Görüntülenen sayfa sayısı", "");
-
-?>
+$L['cfg_maxpages'] = array("Görüntülenecek sayfa sayısı", "");
