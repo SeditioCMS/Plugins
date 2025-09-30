@@ -1,8 +1,8 @@
-<?PHP
+<?php
 
 /* ====================
 Seditio - Website engine
-Copyright Neocrome & Seditio Team
+Copyright (c) Seditio Team
 https://seditio.org
 
 [BEGIN_SED]
@@ -44,9 +44,10 @@ function addpix(gfile)
 	var html = '<img src=\"'+gfile+'\" alt=\"\" />';
 	window." . $openerparent . ".CKEDITOR.instances['" . $c2 . "'].insertHtml(html); " . $auto_popup_close . "
 	}
-function addfile(gfile, gpath)
+function addfile(gfile, gpath, gtitle, ext)
 	{ 
-	var html = '<a href=\"'+gpath+'\" title=\"\">'+gfile+'</a>';
+	gtitle = (gtitle) ? gtitle : gfile;
+	var html = '<i class=\"ext ext-'+ext+'\">&nbsp;</i> <a href=\"'+gpath+'\">'+gtitle+'</a>';
 	window." . $openerparent . ".CKEDITOR.instances['" . $c2 . "'].insertHtml(html); " . $auto_popup_close . "
 	}
 function addfile_pageurl(gfile)

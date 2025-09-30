@@ -1,7 +1,7 @@
 ﻿'use strict';
 (function() {
     CKEDITOR.plugins.add('internallink', {
-        lang: ['en', 'ru'],
+        lang: 'en,ru',
         requires: 'dialog',
         icons: 'internallink',
         hidpi: true,
@@ -103,6 +103,9 @@
             };
 
             httpRequest.open('GET', serviceURL, true);
+			// Indicate AJAX request
+			httpRequest.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); 
+			httpRequest.setRequestHeader('X-Seditio-Csrf', document.querySelector('meta[name="csrf-token"]').content || '');
             httpRequest.send();
         }
     };

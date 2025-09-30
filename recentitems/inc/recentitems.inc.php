@@ -1,8 +1,8 @@
-<?PHP
+<?php
 
 /* ====================
 Seditio - Website engine
-Copyright Neocrome & Seditio Team
+Copyright (c) Seditio Team
 https://seditio.org
 
 [BEGIN_SED]
@@ -252,6 +252,12 @@ function sed_get_latestpolls($limit, $mask)
 
 	// -- AJAX Poll vote
 	if ($ajax && $cfg['ajax'] && $a == "send") {
+		
+		if (!sed_check_csrf()) {
+			sed_die(true, 404);
+			exit;
+		}			
+		
 		if (!empty($id) && !empty($vote)) {
 			if ($usr['id'] > 0) {
 				$sql2 = sed_sql_query("SELECT pv_id FROM $db_polls_voters WHERE pv_pollid='$id' AND (pv_userid='" . $usr['id'] . "' OR pv_userip='" . $usr['ip'] . "') LIMIT 1");

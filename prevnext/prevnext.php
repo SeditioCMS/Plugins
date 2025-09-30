@@ -3,7 +3,6 @@
 Seditio - Website engine
 Copyright Seditio Team
 https://seditio.com.tr
-
 [BEGIN_SED]
 File=plugins/prevnext/prevnext.php
 Version=180
@@ -24,49 +23,69 @@ Order=10
 [END_SED_EXTPLUGIN]
 ==================== */
 
-$sqlprevnext = sed_sql_query("SELECT page_id, page_title, page_alias, page_cat FROM $db_pages WHERE page_state = 0 AND page_cat = '" . sed_sql_prep($pag['page_cat']) . "' ORDER BY page_date ASC");
+// Sayfa listesini çekiyoruz
+$sqlprevnext = sed_sql_query("SELECT page_id, page_title, page_alias, page_cat 
+                              FROM $db_pages 
+                              WHERE page_state = 0 AND page_cat = '" . sed_sql_prep($pag['page_cat']) . "' 
+                              ORDER BY page_date ASC");
 
-$sys['catcode'] = $pag['page_cat'];
-$ipn = 1;
-$find_ipn = null;
 $prevnext = [];
 $prevnextalias = [];
 $prevnexttitle = [];
+$find_ipn = null;
+$ipn = 1;
 
-while ($rowprevnext = sed_sql_fetchassoc($sqlprevnext)) {
-    $prevnext[$ipn] = $rowprevnext['page_id'];
-    $prevnextalias[$rowprevnext['page_id']] = $rowprevnext['page_alias'];
-    $prevnexttitle[$rowprevnext['page_id']] = $rowprevnext['page_title'];
+while ($row = sed_sql_fetchassoc($sqlprevnext)) {
+    $prevnext[$ipn] = $row['page_id'];
+    $prevnextalias[$row['page_id']] = $row['page_alias'];
+    $prevnexttitle[$row['page_id']] = $row['page_title'];
 
-    if ($rowprevnext['page_id'] == $pag['page_id']) { 
-        $find_ipn = $ipn; 
+    if ($row['page_id'] == $pag['page_id']) {
+        $find_ipn = $ipn;
     }
     $ipn++;
 }
 
 $prevnext_count = count($prevnext);
+$prev_id = $next_id = null;
 
-if (isset($find_ipn) && $find_ipn > 1 && $find_ipn < $prevnext_count) {
-    $prev_id = $prevnext[$find_ipn - 1];
-    $next_id = $prevnext[$find_ipn + 1];
-} elseif (isset($find_ipn) && $find_ipn == 1) {
-    $prev_id = $prevnext[$prevnext_count];
-    $next_id = $prevnext[$find_ipn + 1];
-} elseif (isset($find_ipn) && $find_ipn == $prevnext_count) {
-    $prev_id = $prevnext[$find_ipn - 1];
-    $next_id = $prevnext[1];
-} else {
-    $prev_id = $next_id = null;
+// Önceki ve sonraki ID'leri güvenli şekilde belirleme
+if ($find_ipn !== null) {
+    // Önceki sayfa
+    $prev_id = ($find_ipn == 1) ? $prevnext[$prevnext_count] : $prevnext[$find_ipn - 1];
+    // Sonraki sayfa
+    $next_id = ($find_ipn == $prevnext_count) ? $prevnext[1] : $prevnext[$find_ipn + 1];
 }
 
-$next_url = !empty($prevnextalias[$next_id]) 
-    ? '<a href="' . sed_url("page", "al=" . $prevnextalias[$next_id]) . '" title="' . $prevnexttitle[$next_id] . '"> ← ' . mb_substr($prevnexttitle[$next_id], 0, 40) . (mb_strlen($prevnexttitle[$next_id]) > 40 ? '...' : '') . ' </a>'
-    : '<a href="' . sed_url("page", "id=" . $next_id) . '" title="' . $prevnexttitle[$next_id] . '">' . mb_substr($prevnexttitle[$next_id], 0, 40) . (mb_strlen($prevnexttitle[$next_id]) > 40 ? '...' : '') . '</a>';
+// Önceki sayfa URL
+if (!empty($prev_id) && isset($prevnexttitle[$prev_id])) {
+    $prev_title = $prevnexttitle[$prev_id];
+    $prev_alias = !empty($prevnextalias[$prev_id]) ? $prevnextalias[$prev_id] : $prev_id;
+    $prev_url = '<a href="' . sed_url("page", "al=" . $prev_alias) . '" title="' . esc($prev_title) . '">'
+              . mb_substr($prev_title, 0, 40, 'UTF-8')
+              . (mb_strlen($prev_title, 'UTF-8') > 40 ? '...' : '') 
+              . ' →</a>';
+} else {
+    $prev_url = '';
+}
 
-$prev_url = !empty($prevnextalias[$prev_id]) 
-    ? '<a href="' . sed_url("page", "al=" . $prevnextalias[$prev_id]) . '" title="' . $prevnexttitle[$prev_id] . '">' . mb_substr($prevnexttitle[$prev_id], 0, 40) . (mb_strlen($prevnexttitle[$prev_id]) > 40 ? '...' : '') . ' → </a>'
-    : '<a href="' . sed_url("page", "id=" . $prev_id) . '" title="' . $prevnexttitle[$prev_id] . '">' . mb_substr($prevnexttitle[$prev_id], 0, 40) . (mb_strlen($prevnexttitle[$prev_id]) > 40 ? '...' : '') . '</a>';
+// Sonraki sayfa URL
+if (!empty($next_id) && isset($prevnexttitle[$next_id])) {
+    $next_title = $prevnexttitle[$next_id];
+    $next_alias = !empty($prevnextalias[$next_id]) ? $prevnextalias[$next_id] : $next_id;
+    $next_url = '<a href="' . sed_url("page", "al=" . $next_alias) . '" title="' . esc($next_title) . '">'
+              . '← ' . mb_substr($next_title, 0, 40, 'UTF-8')
+              . (mb_strlen($next_title, 'UTF-8') > 40 ? '...' : '') 
+              . '</a>';
+} else {
+    $next_url = '';
+}
 
 $t->assign("PREV_PAGE", $prev_url);
 $t->assign("NEXT_PAGE", $next_url);
+
+// Güvenlik için küçük yardımcı fonksiyon
+function esc($s) {
+    return htmlspecialchars($s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
 ?>
